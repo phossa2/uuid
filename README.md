@@ -6,7 +6,8 @@
 [![Latest Stable Version](https://img.shields.io/packagist/vpre/phossa2/uuid.svg?style=flat)](https://packagist.org/packages/phossa2/uuid)
 [![License](https://poser.pugx.org/phossa2/uuid/license)](http://mit-license.org/)
 
-**phossa2/uuid** is a PHP library.
+**phossa2/uuid** is a PHP library for generating sequential UUID to be used as
+primary key in databases.
 
 It requires PHP 5.4, supports PHP 7.0+ and HHVM. It is compliant with [PSR-1][PSR-1],
 [PSR-2][PSR-2], [PSR-3][PSR-3], [PSR-4][PSR-4], and the proposed [PSR-5][PSR-5].
@@ -35,44 +36,73 @@ or add the following lines to your `composer.json`
 }
 ```
 
+Features
+---
+
+- <a name="seq"></a>**Ordered UUID**
+
+  According to article [Store UUID in an optimized way](https://www.percona.com/blog/2014/12/19/store-uuid-optimized-way/),
+  Non-ordered UUID has big impact on Mysql db insert performance.
+
+- <a name="type"></a>**Typed UUID**
+
+  Instead of following RFC 4122 for generating UUID, we adopted a new design
+  with data types built in. For example, user id has the type of `1010`. And
+  any user id using this lib will start with '2101-0'
+
+- <a name="shard"></a>**UUID supporting sharding**
+
+  With sharding bits built-in, it is easy to shard your db tables.
+
+- <a name="good"></a>**Ready for extension**
+
+  As long as the timestamp algorithm is good enough, it will guarantee
+  uniqueness at least inside one vendor's house.
+
 Design
 ---
 
-Follows UUID format using 32 chars
+Using 32 chars (without `-`)
 
-- version: position 1 (1 char, from left)
+```
+ 2xxx - xxxx - xxxx - xxxx - xxxx - xxxx - xxxx - xxxx
+ ^ ^^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^   ^^^^   ^^^^ ^^^^^^
+ver type          timestamp         shard  vendor remain
+```
 
-  - uuid lib version
+- version: position 0, 1 char
+
+  - this uuid lib version
 
   - default to `2`
 
-- data type: position 1 - 4 (4 chars)
+- data type: position 1 - 4, 4 chars
 
   - 16bit, 65535
 
-  - lib reserved types `1***`
+  - lib reserves types `1***`
 
-  - custom type may use `[2-f]***`
+  - custom types starts from `[2-f]***`
 
-- timestamp: position 5 - 19 (15 chars)
+- timestamp: position 5 - 19, 15 chars
 
   - 60bit
 
-  - can be used for at least 365 years
+  - can be used for at least 360 years
 
-- shard: position 20 - 23 (4 chars)
+- shard: position 20 - 23, 4 chars
 
   - 16bit, 65535
 
-  - user provide this number
+  - for sharding purpose, provided by user
 
 - vendor: position 24 - 27 (4 chars)
 
-  - self claimed vendor id
+  - vendor id provided by user
 
 - remain: position 28 - 31 (4 chars)
 
-  - reserved for future expansion
+  - reserved for future usage
 
 Usage
 ---
@@ -82,19 +112,70 @@ Create the uuid instance,
 ```php
 use Phossa2\Uuid\Uuid;
 
-$uuid = new Uuid();
+// 2100020bc58eb7f18602000100010000
+$uuid = Uuid::get();
+
+// encode/shorten it, can be used in URL
+if (Uuid::isValid($uuid)) {
+    // AWprUw7urpN8bbQ4LciGNa
+    $short = Uuid::encode($uuid);
+
+    // decode
+    var_dump($uuid === Uuid::decode($short)); // true
+}
 ```
 
-Features
----
+Extend `Phossa2\Uuid\Uuid` with your own settings or algorithm,
 
-- <a name="anchor"></a>**Feature One**
+```php
+class MyUuid extends Uuid
+{
+    /*
+     * use this vendor id
+     *
+     * {@inheritDoc}
+     */
+    protected $vendor = '1234';
 
+    /*
+     * use this more reliable sequence
+     *
+     * {@inheritDoc}
+     */
+    protected function getSequence()
+    {
+         // ...
+    }
+}
+```
 
 APIs
 ---
 
-- <a name="api"></a>`LoggerInterface` related
+- <a name="api"></a>`UuidInterface`
+
+  - `Uuid::get(string $dataType, string $shardId): string`
+
+    Both parameters are optional.
+
+- <a name="api2"></a>`UtilityInterface`
+
+  - `Uuid::isValid(string $uuid): bool`
+
+    Check `$uuid` valid or not.
+
+  - `Uuid::info(string $uuid): array`
+
+    Get detail information about this `$uuid` including `version`, `type`,
+    `vendor`, `remain`.
+
+  - `Uuid::encode(string $uuid): string`
+
+    Encode `$uuid` into a short version (base56)
+
+  - `Uuid::decode(string $string): string`
+
+    Decode the short version into full 32-char UUID
 
 Change log
 ---
