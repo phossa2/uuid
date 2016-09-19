@@ -1,0 +1,46 @@
+{
+    "name": "phossa2/uuid",
+    "license": "MIT",
+    "type": "library",
+    "description": "A PHP lib to generate sequential/time based uuid for using as PK in DB.",
+    "keywords": ["uuid", "phossa"],
+    "homepage": "https://github.com/phossa2/uuid",
+    "authors": [
+        {
+            "name": "Hong Zhang",
+            "homepage": "https://github.com/phossa2"
+        }
+    ],
+    "require": {
+        "php": "~5.4|~7.0",
+        "phossa2/shared": "^2.0.21"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*",
+        "squizlabs/php_codesniffer": "2.*"
+    },
+    "autoload": {
+        "psr-0": { "Phossa2\\Uuid\\": "src/" }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check": "phpcs --standard=psr2 src/",
+        "format": "phpcbf --standard=psr2 src/"
+    },
+    "provide": {
+        "psr/log-implementation": "1.0.0"
+    },
+    "config": {
+        "platform": {
+            "php": "5.4.0"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0-dev"
+        }
+    },
+    "archive": {
+        "exclude": [ "!vendor", "tests", "composer.lock" ]
+    }
+}

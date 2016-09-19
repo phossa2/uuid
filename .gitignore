@@ -1,0 +1,16 @@
+# zend studio
+.settings
+.project
+.buildpath
+.externalToolBuilders
+
+# git stuff
+.git
+
+# composer files
+composer.phar
+composer.lock
+vendor
+
+# phpunit files
+phpunit.phar
