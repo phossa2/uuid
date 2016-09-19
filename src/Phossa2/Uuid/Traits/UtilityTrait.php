@@ -74,7 +74,7 @@ trait UtilityTrait
         /*# string */ $base = self::BASE56
     )/*# : string */ {
         if (static::isValid($uuid)) {
-            return static::convertBase($uuid, self::BASE16, self::BASE56);
+            return static::convertBase($uuid, self::BASE16, $base);
         }
         throw new LogicException(
             Message::get(Message::UUID_INVALID, $uuid),
@@ -89,7 +89,7 @@ trait UtilityTrait
         /*# string */ $string,
         /*# string */ $base = self::BASE56
     )/*# : string */ {
-        $uuid = static::convertBase($string, self::BASE56, self::BASE16);
+        $uuid = static::convertBase($string, $base, self::BASE16);
         if (static::isValid($uuid)) {
             return $uuid;
         }

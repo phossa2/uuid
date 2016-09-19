@@ -74,7 +74,7 @@ class Uuid implements UuidInterface, UtilityInterface
     /**
      * Get instance
      *
-     * return  UuidInterface
+     * return  Uuid
      * @access protected
      * @static
      */

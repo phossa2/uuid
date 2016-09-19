@@ -50,7 +50,7 @@ Features
   with data types built in. For example, user id has the type of `1010`. And
   any user id using this lib will start with '2101-0'
 
-- <a name="shard"></a>**UUID supporting sharding**
+- <a name="shard"></a>**Sharding supported**
 
   With sharding bits built-in, it is easy to shard your db tables.
 
@@ -62,7 +62,7 @@ Features
 Design
 ---
 
-Using 32 chars (without `-`)
+Using 32 chars, without `-`
 
 ```
  2xxx - xxxx - xxxx - xxxx - xxxx - xxxx - xxxx - xxxx
@@ -106,8 +106,6 @@ ver type          timestamp         shard  vendor remain
 
 Usage
 ---
-
-Create the uuid instance,
 
 ```php
 use Phossa2\Uuid\Uuid;
