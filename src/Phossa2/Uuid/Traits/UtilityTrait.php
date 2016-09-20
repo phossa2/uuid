@@ -142,7 +142,6 @@ trait UtilityTrait
         foreach (str_split($input) as $char) {
             $res = static::add((int) strpos($fromBase, $char), static::mul($res, $len));
         }
-        var_dump($res);
         return $res;
     }
 
@@ -158,7 +157,6 @@ trait UtilityTrait
         /*# string */ $input,
         /*# string */ $toBase
     )/*# string */ {
-        return '';
         $len = strlen($toBase);
         $res = '';
         do {
@@ -233,7 +231,8 @@ trait UtilityTrait
     protected static function checkGmp()
     {
         if (null === static::$gmp) {
-            static::$gmp = function_exists('gmp_add');
+            //static::$gmp = function_exists('gmp_add');
+            static::$gmp = false;
         }
     }
 }
