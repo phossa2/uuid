@@ -140,6 +140,7 @@ trait UtilityTrait
         $len = strlen($fromBase);
         $res = '0';
         foreach (str_split($input) as $char) {
+            var_dump($res);
             $res = static::add((int) strpos($fromBase, $char), static::mul($res, $len));
         }
         return $res;
@@ -160,6 +161,7 @@ trait UtilityTrait
         $len = strlen($toBase);
         $res = '';
         do {
+            var_dump($input);
             $digit = static::mod($input, $len);
             $res = $toBase[(int) $digit] . $res;
             $input = static::div($input, $len);
