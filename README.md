@@ -175,6 +175,25 @@ APIs
 
     Decode the short version into full 32-char UUID
 
+Predefined data types
+---
+
+- Generic OID `UuidInterface::TYPE_OID`, value `1000`.
+
+- User id `UuidInterface::TYPE_USER`, value `1010`.
+
+- Post or article `UuidInterface::TYPE_POST`, value `1020`.
+
+- News `UuidInterface::TYPE_NEWS`, value `1021`.
+
+- Image `UuidInterface::TYPE_IMAGE`, value `1030`.
+
+- Image album `UuidInterface::TYPE_ALBUM`, value `1031`.
+
+- Comment `UuidInterface::TYPE_COMM`, value `1040`.
+
+- Rating `UuidInterface::TYPE_RATE`, value `1041`.
+
 Change log
 ---
 
