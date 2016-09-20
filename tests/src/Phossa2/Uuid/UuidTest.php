@@ -31,7 +31,6 @@ class UuidTest extends \PHPUnit_Framework_TestCase
      */
     public function testGet()
     {
-        /*
         $uuid = Uuid::get(
             '000a', // type
             '000c' // shard
@@ -43,7 +42,7 @@ class UuidTest extends \PHPUnit_Framework_TestCase
             'shard' => '000c',
             'vendor' => '0001',
             'remain' => '0000'
-        ], $info); */
+        ], $info);
     }
 
     /**
@@ -53,10 +52,9 @@ class UuidTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsValid()
     {
-        /*
         $uuid = Uuid::get();
         $this->assertTrue(Uuid::isValid($uuid));
-        $this->assertFalse(Uuid::isValid($uuid . 'x')); */
+        $this->assertFalse(Uuid::isValid($uuid . 'x'));
     }
 
     /**
@@ -66,13 +64,10 @@ class UuidTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncode()
     {
-        $str = '2ab0000000000000000000c010000000';
-        var_dump(Uuid::encode($str));
-        /*
         $uuid = Uuid::get();
         if ($uuid === Uuid::get()) {
             $this->throwException(new \LogicException("duplication found"));
         }
-        $this->assertEquals($uuid, Uuid::decode(Uuid::encode($uuid))); */
+        $this->assertEquals($uuid, Uuid::decode(Uuid::encode($uuid)));
     }
 }

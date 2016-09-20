@@ -220,7 +220,7 @@ trait UtilityTrait
     protected static function div($a, $b)
     {
         static::checkGmp();
-        return static::$gmp ? gmp_strval(gmp_div($a, $b, true)) : bcdiv($a, $b, 0);
+        return static::$gmp ? gmp_strval(gmp_div($a, $b)) : bcdiv($a, $b, 0);
     }
 
     /**
@@ -231,8 +231,7 @@ trait UtilityTrait
     protected static function checkGmp()
     {
         if (null === static::$gmp) {
-            //static::$gmp = function_exists('gmp_add');
-            static::$gmp = false;
+            static::$gmp = function_exists('gmp_add');
         }
     }
 }
