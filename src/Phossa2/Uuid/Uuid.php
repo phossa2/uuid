@@ -96,7 +96,7 @@ class Uuid implements UuidInterface, UtilityInterface
     protected function getTimestamp()/*# : string */
     {
         $num = static::add(
-            static::mul((microtime(true) - strtotime('2016/01/01')), '100000000'),
+            static::mul((string) (microtime(true) - strtotime('2016/01/01')), '100000000'),
             $this->getSequence() % 10000
         );
         return substr('00' . static::fromBase10($num, self::BASE16), -15);
