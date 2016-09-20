@@ -11,3 +11,4 @@ before_script:
   - composer self-update
   - composer update nothing
   - composer --prefer-source --dev install
+  - echo "extension = gmd.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
