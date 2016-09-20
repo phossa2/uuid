@@ -52,8 +52,8 @@ trait UtilityTrait
     {
         if (static::isValid($uuid)) {
             return [
-                'version' => substr($uuid,  0, 1),
-                'type'    => substr($uuid,  1, 4),
+                'version' => substr($uuid, 0, 1),
+                'type'    => substr($uuid, 1, 4),
                 'shard'   => substr($uuid, 20, 4),
                 'vendor'  => substr($uuid, 24, 4),
                 'remain'  => substr($uuid, 28, 4)
@@ -163,7 +163,7 @@ trait UtilityTrait
             $digit = bcmod($input, $len);
             $res = $toBase[(int) $digit] . $res;
             $input = bcdiv($input, $len, 0);
-        } while($input != '0');
+        } while ($input != '0');
         return $res;
     }
 }
