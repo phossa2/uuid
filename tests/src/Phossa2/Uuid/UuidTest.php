@@ -66,6 +66,8 @@ class UuidTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncode()
     {
+        $str = '2ab0000000000000000000c010000000';
+        $this->assertEquals($str,Uuid::decode(Uuid::encode($str)));
         /*
         $uuid = Uuid::get();
         if ($uuid === Uuid::get()) {
