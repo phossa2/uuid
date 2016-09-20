@@ -49,6 +49,12 @@ interface UuidInterface
     const TYPE_COMM = '1040';
     const TYPE_RATE = '1041';
 
+    // connection tracking
+    const TYPE_UID = '1050'; // unique user id
+    const TYPE_DEVICE  = '1051'; // device
+    const TYPE_SESSION = '1052'; // session
+    const TYPE_REQUEST = '1053'; // request
+
     /**
      * Generate an UUID
      *
