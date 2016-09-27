@@ -3,7 +3,7 @@
     "license": "MIT",
     "type": "library",
     "description": "A PHP lib to generate sequential/time based uuid for using as PK in DB.",
-    "keywords": ["uuid", "phossa"],
+    "keywords": ["uuid", "phossa", "phossa2", "framework"],
     "homepage": "https://github.com/phossa2/uuid",
     "authors": [
         {
@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "php": "~5.4|~7.0",
+        "php": "~5.4.0|~7.0.0",
         "phossa2/shared": "^2.0.21"
     },
     "require-dev": {
@@ -20,15 +20,12 @@
         "squizlabs/php_codesniffer": "2.*"
     },
     "autoload": {
-        "psr-0": { "Phossa2\\Uuid\\": "src/" }
+        "psr-4": { "Phossa2\\Uuid\\": "Uuid/" }
     },
     "scripts": {
         "test": "phpunit",
-        "check": "phpcs --standard=psr2 src/",
-        "format": "phpcbf --standard=psr2 src/"
-    },
-    "provide": {
-        "psr/log-implementation": "1.0.0"
+        "check": "phpcs --standard=psr2 Uuid/",
+        "format": "phpcbf --standard=psr2 Uuid/"
     },
     "config": {
         "platform": {
@@ -37,7 +34,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.0-dev"
+            "dev-master": "2.1-dev"
         }
     },
     "archive": {

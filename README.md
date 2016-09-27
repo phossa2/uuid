@@ -1,10 +1,11 @@
 # phossa2/uuid
 [![Build Status](https://travis-ci.org/phossa2/uuid.svg?branch=master)](https://travis-ci.org/phossa2/uuid)
 [![Code Quality](https://scrutinizer-ci.com/g/phossa2/uuid/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/phossa2/uuid/)
+[![Code Climate](https://codeclimate.com/github/phossa2/uuid/badges/gpa.svg)](https://codeclimate.com/github/phossa2/uuid)
 [![PHP 7 ready](http://php7ready.timesplinter.ch/phossa2/uuid/master/badge.svg)](https://travis-ci.org/phossa2/uuid)
 [![HHVM](https://img.shields.io/hhvm/phossa2/uuid.svg?style=flat)](http://hhvm.h4cc.de/package/phossa2/uuid)
 [![Latest Stable Version](https://img.shields.io/packagist/vpre/phossa2/uuid.svg?style=flat)](https://packagist.org/packages/phossa2/uuid)
-[![License](https://poser.pugx.org/phossa2/uuid/license)](http://mit-license.org/)
+[![License](https://img.shields.io/:license-mit-blue.svg)](http://mit-license.org/)
 
 **phossa2/uuid** is a PHP library for generating sequential UUID to be used as
 primary key in databases.
@@ -31,7 +32,7 @@ or add the following lines to your `composer.json`
 ```json
 {
     "require": {
-       "phossa2/uuid": "^2.0.0"
+       "phossa2/uuid": "2.*"
     }
 }
 ```
