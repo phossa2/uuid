@@ -20,12 +20,12 @@
         "squizlabs/php_codesniffer": "2.*"
     },
     "autoload": {
-        "psr-4": { "Phossa2\\Uuid\\": "Uuid/" }
+        "psr-4": { "Phossa2\\Uuid\\": "src/Uuid/" }
     },
     "scripts": {
         "test": "phpunit",
-        "check": "phpcs --standard=psr2 Uuid/",
-        "format": "phpcbf --standard=psr2 Uuid/"
+        "check": "phpcs --standard=psr2 src/",
+        "format": "phpcbf --standard=psr2 src/"
     },
     "config": {
         "platform": {
