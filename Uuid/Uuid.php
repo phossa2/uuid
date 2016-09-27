@@ -14,7 +14,7 @@
 
 namespace Phossa2\Uuid;
 
-use Phossa2\Uuid\Traits\SequenceTrait;
+use Phossa2\Uuid\Traits\UtilityTrait;
 use Phossa2\Uuid\Interfaces\UuidInterface;
 use Phossa2\Uuid\Interfaces\UtilityInterface;
 
@@ -29,7 +29,7 @@ use Phossa2\Uuid\Interfaces\UtilityInterface;
  */
 class Uuid implements UuidInterface, UtilityInterface
 {
-    use SequenceTrait;
+    use UtilityTrait;
 
     /**
      * Default vendor code

@@ -166,7 +166,7 @@ APIs
   - `Uuid::info(string $uuid): array`
 
     Get detail information about this `$uuid` including `version`, `type`,
-    `vendor`, `remain`.
+    `time`, `vendor`, `remain`.
 
   - `Uuid::encode(string $uuid): string`
 

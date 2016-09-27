@@ -14,9 +14,10 @@
 
 namespace Phossa2\Uuid\Traits;
 
-use Phossa2\Uuid\Exception\LogicException;
-use Phossa2\Uuid\Interfaces\UtilityInterface;
 use Phossa2\Uuid\Message\Message;
+use Phossa2\Uuid\Exception\LogicException;
+use Phossa2\Uuid\Interfaces\UuidInterface;
+use Phossa2\Uuid\Interfaces\UtilityInterface;
 
 /**
  * UtilityTrait
@@ -24,6 +25,7 @@ use Phossa2\Uuid\Message\Message;
  * @package Phossa2\Uuid
  * @author  Hong Zhang <phossa@126.com>
  * @see     UtilityInterface
+ * @see     UuidInterface
  * @version 2.1.0
  * @since   2.0.0 added
  * @since   2.1.0 including SequenceTrait, updated info()
@@ -31,11 +33,13 @@ use Phossa2\Uuid\Message\Message;
 trait UtilityTrait
 {
     /**
-     * GMP supported ?
-     * @var    bool
+     * epoch for this uuid lib
+     *
+     * @var    string
      * @access protected
+     * @staticvar
      */
-    protected static $gmp;
+    protected static $epoch = '2016/01/01';
 
     /**
      * {@inheritDoc}
@@ -169,5 +173,45 @@ trait UtilityTrait
         return $res;
     }
 
-    abstract protected static function toTimeStamp(/*# string */ $hexValue)/*# : int */;
+    /**
+     * Reverse of getTimestamp(), convert 15-char string to unix time
+     *
+     * @param  string $hexString
+     * @return int
+     * @access protected
+     * @static
+     */
+    protected static function toTimeStamp(/*# string */ $hexString)/*# : int */
+    {
+        $dec = bcdiv(static::toBase10($hexString, self::BASE16), 100000000, 0);
+        return (int) ($dec + strtotime(static::$epoch));
+    }
+
+    /**
+     * Time related part
+     *
+     * @return string 15-char string
+     * @access protected
+     */
+    protected function getTimestamp()/*# : string */
+    {
+        $num = bcadd(
+            bcmul((microtime(true) - strtotime(static::$epoch)), 100000000),
+            $this->getSequence() % 10000
+        );
+        return substr('00' . static::fromBase10($num, self::BASE16), -15);
+    }
+
+    /**
+     * Get a pseudo sequence number
+     *
+     * @return int
+     * @access protected
+     * @static
+     */
+    protected function getSequence()/*# : int */
+    {
+        static $seq = 0;
+        return $seq++;
+    }
 }
