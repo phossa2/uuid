@@ -36,13 +36,12 @@ class UuidTest extends \PHPUnit_Framework_TestCase
             '000c' // shard
         );
         $info = Uuid::info($uuid);
-        $this->assertEquals([
-            'version' => '2',
-            'type' => '000a',
-            'shard' => '000c',
-            'vendor' => '0001',
-            'remain' => '0000'
-        ], $info);
+        $this->assertEquals('2', $info['version']);
+        $this->assertEquals('000a', $info['type']);
+        $this->assertEquals('000c', $info['shard']);
+        $this->assertEquals('0001', $info['vendor']);
+        $this->assertEquals('0000', $info['remain']);
+        $this->assertTrue(abs($info['time'] - time()) <= 1);
     }
 
     /**

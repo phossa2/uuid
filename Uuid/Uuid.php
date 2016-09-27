@@ -14,7 +14,7 @@
 
 namespace Phossa2\Uuid;
 
-use Phossa2\Uuid\Traits\UtilityTrait;
+use Phossa2\Uuid\Traits\SequenceTrait;
 use Phossa2\Uuid\Interfaces\UuidInterface;
 use Phossa2\Uuid\Interfaces\UtilityInterface;
 
@@ -23,12 +23,13 @@ use Phossa2\Uuid\Interfaces\UtilityInterface;
  *
  * @package Phossa2\Uuid
  * @author  Hong Zhang <phossa@126.com>
- * @version 2.0.0
+ * @version 2.1.0
  * @since   2.0.0 added
+ * @since   2.1.0 moved sequence related stuff to SequenceTrait
  */
 class Uuid implements UuidInterface, UtilityInterface
 {
-    use UtilityTrait;
+    use SequenceTrait;
 
     /**
      * Default vendor code
@@ -61,7 +62,7 @@ class Uuid implements UuidInterface, UtilityInterface
         /*# string */ $dataType = self::TYPE_OID,
         /*# string */ $shardId = '0001'
     )/*# : string */ {
-        $obj = self::getInstance();
+        $obj = static::getInstance();
         return
             substr(self::VERSION, 0, 1) .   // 0
             $dataType .                     // 1 - 4
@@ -85,33 +86,5 @@ class Uuid implements UuidInterface, UtilityInterface
             self::$instances[$class] = new static();
         }
         return self::$instances[$class];
-    }
-
-    /**
-     * Time related part
-     *
-     * @return string 15-char string
-     * @access protected
-     */
-    protected function getTimestamp()/*# : string */
-    {
-        $num = bcadd(
-            bcmul((microtime(true) - strtotime('2016/01/01')), 100000000),
-            $this->getSequence() % 10000
-        );
-        return substr('00' . static::fromBase10($num, self::BASE16), -15);
-    }
-
-    /**
-     * Get a pseudo sequence number
-     *
-     * @return int
-     * @access protected
-     * @static
-     */
-    protected function getSequence()/*# : int */
-    {
-        static $seq = 0;
-        return $seq++;
     }
 }

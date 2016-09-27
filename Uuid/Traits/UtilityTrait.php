@@ -24,8 +24,9 @@ use Phossa2\Uuid\Message\Message;
  * @package Phossa2\Uuid
  * @author  Hong Zhang <phossa@126.com>
  * @see     UtilityInterface
- * @version 2.0.0
+ * @version 2.1.0
  * @since   2.0.0 added
+ * @since   2.1.0 including SequenceTrait, updated info()
  */
 trait UtilityTrait
 {
@@ -54,6 +55,7 @@ trait UtilityTrait
             return [
                 'version' => substr($uuid, 0, 1),
                 'type'    => substr($uuid, 1, 4),
+                'time'    => static::toTimestamp(substr($uuid, 5, 15)),
                 'shard'   => substr($uuid, 20, 4),
                 'vendor'  => substr($uuid, 24, 4),
                 'remain'  => substr($uuid, 28, 4)
@@ -166,4 +168,6 @@ trait UtilityTrait
         } while ($input != '0');
         return $res;
     }
+
+    abstract protected static function toTimeStamp(/*# string */ $hexValue)/*# : int */;
 }

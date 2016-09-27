@@ -9,3 +9,4 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
   - 2016-09-27 restructured to follow psr-4 standard
   - 2016-09-27 moved to version 2.1-dev
+  - 2016-09-27 modified `info()` to return time info from given uuid
